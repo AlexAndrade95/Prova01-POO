@@ -1,0 +1,26 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+<%
+    if(request.getParameter("session-login") ==null) {
+        session.setAttribute("session-name", request.getParameter("session-name"));
+        response.sendRedirect(request.getRequestURI());
+    }else if (request.getParameter("session-name") != null) {
+            session.removeAttribute("session-name");
+            response.sendRedirect(request.getRequestURI());
+    }
+    String sessionName = (String) session.getAttribute("session-name);
+%>
+
+<h1>Alex de Andrade Neves</h1>
+<form method="post">
+    <a href="index.jsp">Ìndice</a>
+    <a href="Alex-Andrade.jsp">Informações úteis</a>
+    <% if(sessionName==null) {%>
+    <input type="text" name="session-name" placeholder="Entre com seu nome"/>
+        <input type="submit" name="session-login" value="Entrar"/>
+    <%} else{%>
+         Bem vindo, <% = sessionName %>
+    <input type="submit" name="session-logout" value="Sair"/>
+    <%} <%)
+</form>
